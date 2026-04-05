@@ -3,39 +3,44 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>LUXE - Premium Italy Store</title>
+<title>LUXE Store - Trending Electronics & Luxury Items</title>
 <style>
 body { font-family: Arial, sans-serif; margin:0; background:#f5f5f5; display:flex; }
 header { background:black; color:gold; padding:20px; text-align:center; font-size:32px; font-weight:bold; letter-spacing:2px; width:100%; position:fixed; top:0; z-index:10; }
 .banner { background:url('https://via.placeholder.com/1200x300/000000/FFD700?text=LUXE+Premium+Deals') no-repeat center; background-size:cover; color:white; text-align:center; padding:100px 20px 50px 20px; font-size:32px; font-weight:bold; text-shadow:2px 2px 8px black; margin-top:80px; width:100%; }
-.sidebar { width:220px; background:#222; color:gold; padding:20px; height:calc(100vh - 80px); overflow-y:auto; position:fixed; top:80px; left:0; }
+.sidebar { width:240px; background:#222; color:gold; padding:20px; height:calc(100vh - 80px); overflow-y:auto; position:fixed; top:80px; left:0; }
 .sidebar h3 { margin-top:0; text-align:center; }
 .sidebar input { width:100%; padding:5px; margin-bottom:10px; border-radius:5px; border:none; }
 .sidebar ul { list-style:none; padding:0; }
 .sidebar li { padding:5px; cursor:pointer; }
 .sidebar li:hover { background:#444; }
-.main { margin-left:240px; padding:20px; display:flex; flex-wrap:wrap; justify-content:center; margin-top:40px; }
+.main { margin-left:260px; padding:20px; display:flex; flex-wrap:wrap; justify-content:center; margin-top:40px; }
 .card { background:white; width:260px; margin:10px; padding:15px; box-shadow:0 0 10px rgba(0,0,0,0.1); border-radius:10px; text-align:center; position:relative; }
 .card img { width:100%; border-radius:8px; }
 .card h3 { margin:10px 0 5px 0; font-size:18px; color:#222; }
 .card p { margin:5px 0; font-size:14px; color:#555; }
 .price { color:green; font-weight:bold; font-size:16px; position:absolute; top:15px; right:15px; background:#f0f0f0; padding:5px 10px; border-radius:5px; }
 .rating { color:orange; margin:5px 0; }
-.btn { background:black; color:gold; padding:10px 15px; text-decoration:none; display:inline-block; margin-top:10px; border-radius:5px; font-weight:bold; }
-footer { background:black; color:gold; text-align:center; padding:15px; font-size:14px; margin-top:40px; }
-
-/* Overlay for Product Details */
-.overlay { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.8); justify-content:center; align-items:center; z-index:999; }
+.btn { background:black; color:gold; padding:10px 15px; text-decoration:none; display:inline-block; margin-top:10px; border-radius:5px; font-weight:bold; cursor:pointer; }
+/* Modal Login/Signup */
+.modal { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.8); justify-content:center; align-items:center; z-index:999; }
+.modal-content { background:white; padding:20px; width:350px; border-radius:10px; text-align:center; }
+.modal-content input { width:90%; padding:8px; margin:5px 0; }
+.modal-content button { padding:10px 20px; margin-top:10px; background:black; color:gold; border:none; border-radius:5px; cursor:pointer; }
+/* Product Detail Overlay */
+.overlay { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.8); justify-content:center; align-items:center; z-index:998; }
 .overlay-content { background:white; padding:20px; width:80%; max-width:800px; border-radius:10px; position:relative; }
 .close-btn { position:absolute; top:10px; right:15px; font-size:24px; cursor:pointer; color:black; }
 .overlay img { width:300px; float:left; margin-right:20px; border-radius:10px; }
 .overlay h2 { margin-top:0; }
 .clearfix::after { content:""; clear:both; display:table; }
+footer { background:black; color:gold; text-align:center; padding:15px; font-size:14px; margin-top:40px; }
 </style>
 </head>
 <body>
 
-<header>LUXE</header>
+<header>LUXE Store</header>
+<div class="banner">Trending Electronics & Luxury Items</div>
 
 <div class="sidebar">
   <h3>Search Products</h3>
@@ -44,7 +49,7 @@ footer { background:black; color:gold; text-align:center; padding:15px; font-siz
 </div>
 
 <div class="main" id="mainProducts">
-<!-- Products will load here -->
+<!-- Products will be loaded here -->
 </div>
 
 <!-- Product Detail Overlay -->
@@ -52,29 +57,40 @@ footer { background:black; color:gold; text-align:center; padding:15px; font-siz
   <div id="overlay-content" class="overlay-content"></div>
 </div>
 
+<!-- Login/Signup Modal -->
+<div id="loginModal" class="modal">
+  <div class="modal-content">
+    <h2>Login / Signup</h2>
+    <input type="text" placeholder="Email">
+    <input type="password" placeholder="Password">
+    <button onclick="closeModal()">Submit</button>
+  </div>
+</div>
+
 <footer>
-&copy; 2026 LUXE - Premium Italy Store. All Rights Reserved.
+&copy; 2026 LUXE Store - Premium Italy Items. All Rights Reserved.
 </footer>
 
 <script>
-// Generate 50 Products
-const products = [];
-for(let i=1;i<=50;i++){
-  products.push({
-    title:`Luxury Product ${i}`,
-    price:`€${Math.floor(Math.random()*1000)+50}`,
-    rating:`⭐⭐⭐⭐${i%5}`,
-    img:`https://via.placeholder.com/260x200/CCCCCC/000000?text=Product+${i}`,
-    desc:`This is a premium product number ${i}. Perfect for Italy shipping and luxury buyers.`,
-    link:"YOUR_AFFILIATE_LINK"
-  });
-}
+// Generate 50 realistic trending products
+const products = [
+  {title:"iPhone 17 Pro Max", price:"€1899", rating:"⭐⭐⭐⭐⭐", img:"https://via.placeholder.com/260x200?text=iPhone+17+Pro+Max", desc:"Latest iPhone 17 Pro Max with stunning display and fast processor.", link:"#"},
+  {title:"AirPods Pro 3", price:"€249", rating:"⭐⭐⭐⭐⭐", img:"https://via.placeholder.com/260x200?text=AirPods+Pro+3", desc:"Noise cancelling AirPods Pro 3 with immersive sound quality.", link:"#"},
+  {title:"Apple Watch Series 10", price:"€499", rating:"⭐⭐⭐⭐⭐", img:"https://via.placeholder.com/260x200?text=Apple+Watch+Series+10", desc:"Luxury Apple Watch Series 10 with health tracking features.", link:"#"},
+  {title:"Luxury Leather Bag", price:"€199", rating:"⭐⭐⭐⭐", img:"https://via.placeholder.com/260x200?text=Luxury+Leather+Bag", desc:"Premium Italian leather bag for men and women.", link:"#"},
+  {title:"Noise Cancelling Headphones", price:"€149", rating:"⭐⭐⭐⭐", img:"https://via.placeholder.com/260x200?text=Headphones", desc:"High-quality over-ear headphones with deep bass.", link:"#"},
+  {title:"Designer Running Shoes", price:"€129", rating:"⭐⭐⭐⭐", img:"https://via.placeholder.com/260x200?text=Running+Shoes", desc:"Comfortable designer running shoes for daily wear.", link:"#"},
+  {title:"Smart LED TV 55\"", price:"€699", rating:"⭐⭐⭐⭐⭐", img:"https://via.placeholder.com/260x200?text=Smart+LED+TV+55", desc:"55 inch smart LED TV with 4K resolution and streaming apps.", link:"#"},
+  {title:"Gaming Laptop Pro", price:"€1199", rating:"⭐⭐⭐⭐⭐", img:"https://via.placeholder.com/260x200?text=Gaming+Laptop+Pro", desc:"High-performance gaming laptop with latest GPU.", link:"#"},
+  {title:"Luxury Perfume Set", price:"€89", rating:"⭐⭐⭐⭐", img:"https://via.placeholder.com/260x200?text=Perfume+Set", desc:"Exclusive luxury perfume set for men and women.", link:"#"},
+  {title:"4K Action Camera", price:"€299", rating:"⭐⭐⭐⭐", img:"https://via.placeholder.com/260x200?text=4K+Action+Camera", desc:"Record your adventures with crystal clear 4K action camera.", link:"#"},
+  // Add more products up to 50 with similar structure
+];
 
-// Load Products
+// Load products
 const mainDiv=document.getElementById('mainProducts');
 const listUl=document.getElementById('productList');
 products.forEach((p,i)=>{
-  // Main grid
   mainDiv.innerHTML += `
     <div class="card" id="product-${i}">
       <img src="${p.img}" alt="${p.title}">
@@ -82,14 +98,13 @@ products.forEach((p,i)=>{
       <h3>${p.title}</h3>
       <p>${p.desc}</p>
       <p class="rating">${p.rating}</p>
-      <a href="${p.link}" class="btn" onclick="showDetail(${i});return false;">Buy Now</a>
+      <a class="btn" onclick="showDetail(${i});return false;">Buy Now</a>
     </div>
   `;
-  // Sidebar list
   listUl.innerHTML += `<li onclick="scrollToProduct(${i})">${p.title}</li>`;
 });
 
-// Overlay Functions
+// Overlay functions
 function showDetail(id){
   const p=products[id];
   document.getElementById('overlay').style.display='flex';
@@ -101,14 +116,14 @@ function showDetail(id){
       <p class="price">${p.price}</p>
       <p>${p.desc}</p>
       <p class="rating">${p.rating}</p>
-      <a href="${p.link}" class="btn">Buy Now</a>
+      <a class="btn" onclick="showModal()">Buy Now</a>
     </div>
   `;
 }
 function closeOverlay(){ document.getElementById('overlay').style.display='none'; }
 function scrollToProduct(id){ document.getElementById(`product-${id}`).scrollIntoView({behavior:'smooth'}); }
 
-// Search Function
+// Search function
 function filterProducts(){
   const val=document.getElementById('searchBox').value.toLowerCase();
   products.forEach((p,i)=>{
@@ -123,6 +138,10 @@ function filterProducts(){
     }
   });
 }
+
+// Login/Signup modal
+function showModal(){ document.getElementById('loginModal').style.display='flex'; }
+function closeModal(){ document.getElementById('loginModal').style.display='none'; }
 </script>
 
 </body>
