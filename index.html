@@ -130,6 +130,8 @@ header {
   transition:all 0.3s;
 }
 .btn:hover { background:linear-gradient(45deg, #ffd700, #ffed4a); color:#000; transform:scale(1.05); }
+.btn-buy { background:linear-gradient(45deg, #ff6b35, #f7931e) !important; color:white !important; }
+.btn-buy:hover { background:linear-gradient(45deg, #e55a2b, #d94f1a) !important; color:white !important; }
 
 .modal, .overlay { 
   display:none; 
@@ -219,7 +221,7 @@ footer {
 
 <header>
   <div class="header-top">
-    <div class="logo">LUXE Store</div>
+    <div class="logo">LUXE Store 🇮🇹</div>
     <div class="header-top-right">
       <a href="#" onclick="showModal()">Login/Signup</a>
       <a href="#">🛒 Cart (0)</a>
@@ -233,13 +235,13 @@ footer {
     </div>
     <div class="categories">
       <ul>
-        <li><a href="#">📱 Electronics</a></li>
-        <li><a href="#">👔 Fashion</a></li>
-        <li><a href="#">💎 Luxury</a></li>
-        <li><a href="#">⌚ Watches</a></li>
-        <li><a href="#">💻 Laptops</a></li>
-        <li><a href="#">👟 Shoes</a></li>
-        <li><a href="#">💼 Bags</a></li>
+        <li><a href="#" onclick="filterByCategory('Phones')">📱 Phones</a></li>
+        <li><a href="#" onclick="filterByCategory('Watches')">⌚ Watches</a></li>
+        <li><a href="#" onclick="filterByCategory('Laptops')">💻 Laptops</a></li>
+        <li><a href="#" onclick="filterByCategory('Electronics')">🎧 Electronics</a></li>
+        <li><a href="#" onclick="filterByCategory('Fashion')">👔 Fashion</a></li>
+        <li><a href="#" onclick="filterByCategory('Luxury')">💎 Luxury</a></li>
+        <li><a href="#" onclick="showAllProducts()">All</a></li>
       </ul>
     </div>
   </div>
@@ -248,9 +250,9 @@ footer {
 <div class="main-container">
   <div style="display:flex;">
     <div class="sidebar">
-      <h3>🔥 Top Trending</h3>
+      <h3>🔥 Top Trending Italy</h3>
       <input type="text" id="sidebarSearch" placeholder="Quick search..." onkeyup="filterProducts()">
-      <ul id="productList"></ul>
+      <ul id="sidebarProducts"></ul>
     </div>
     
     <div>
@@ -267,15 +269,15 @@ footer {
 </div>
 
 <!-- Product Detail Overlay -->
-<div id="overlay" class="overlay">
-  <div id="overlay-content" class="overlay-content">
+<div id="overlay" class="overlay" onclick="closeOverlay()">
+  <div id="overlay-content" class="overlay-content" onclick="event.stopPropagation()">
     <!-- Dynamic content -->
   </div>
 </div>
 
 <!-- Login/Signup Modal -->
-<div id="loginModal" class="modal">
-  <div class="modal-content">
+<div id="loginModal" class="modal" onclick="closeModal()">
+  <div class="modal-content" onclick="event.stopPropagation()">
     <span class="close-btn" onclick="closeModal()">×</span>
     <h2>👋 Welcome Back</h2>
     <input type="text" placeholder="📧 Email" id="emailInput">
@@ -319,21 +321,15 @@ footer {
 </footer>
 
 <script>
-// 50 TRENDING ITALY PRODUCTS WITH HD IMAGES - PERFECT PRICES
+// 50+ TRENDING ITALY PRODUCTS 2026 - Perfect Prices & HD Images
 const products = [
-  // PHONES (Required)
-  {title:"iPhone 17 Pro Max 1TB", price:"€1899", rating:"⭐⭐⭐⭐⭐", img:"https://images.unsplash.com/photo-1592899679764-6d9a0169e4c7?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80", desc:"Titanium Desert Titanium, A19 Pro chip, 48MP camera", category:"Phones"},
-  {title:"Samsung Galaxy S24 Ultra", price:"€1399", rating:"⭐⭐⭐⭐⭐", img:"https://images.unsplash.com/photo-1701363684658-e503331e36f9?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80", desc:"S Pen included, 200MP camera, 12GB RAM Titanium Gray", category:"Phones"},
+  // 🔥 TOP PHONES (Italy Trending)
+  {id:1, title:"iPhone 17 Pro Max 1TB", price:"€1899", rating:"⭐⭐⭐⭐⭐ 4.9", img:"https://images.unsplash.com/photo-1592899679764-6d9a0169e4c7?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80", desc:"Titanium Desert Titanium, A19 Pro chip, 48MP Fusion camera, 120Hz ProMotion", category:"Phones"},
+  {id:2, title:"Samsung Galaxy S25 Ultra", price:"€1399", rating:"⭐⭐⭐⭐⭐ 4.8", img:"https://images.unsplash.com/photo-1701363684658-e503331e36f9?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80", desc:"S Pen included, 200MP camera, 16GB RAM, Titanium Black", category:"Phones"},
+  {id:3, title:"iPhone 17 Pro", price:"€1299", rating:"⭐⭐⭐⭐⭐ 4.9", img:"https://images.unsplash.com/photo-1601784551446-20c9e07cdbdb?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80", desc:"Natural Titanium, A19 chip, 48MP camera system", category:"Phones"},
+  {id:4, title:"Google Pixel 9 Pro XL", price:"€1199", rating:"⭐⭐⭐⭐⭐ 4.7", img:"https://images.unsplash.com/photo-1721800850687-767ae6179f5b?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80", desc:"Porcelain, Tensor G4, 50MP camera, 7 years updates", category:"Phones"},
   
-  // HEADPHONES & AUDIO
-  {title:"Sony WH-1000XM5", price:"€349", rating:"⭐⭐⭐⭐⭐", img:"https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80", desc:"Best ANC, 30hr battery, Hi-Res Audio Black", category:"Electronics"},
-  {title:"AirPods Pro 3", price:"€249", rating:"⭐⭐⭐⭐⭐", img:"https://images.unsplash.com/photo-1588880331178-7fdf7e1e4e57?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80", desc:"Spatial Audio, Active Noise Cancel, USB-C MagSafe", category:"Electronics"},
-  {title:"Bose QuietComfort Ultra", price:"€429", rating:"⭐⭐⭐⭐⭐", img:"https://images.unsplash.com/photo-1613644716394-1f308eb69299?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80", desc:"Immersive Audio, CustomTune tech, 24hr battery", category:"Electronics"},
-  
-  // LAPTOPS
-  {title:"MacBook Pro 16 M4 Pro", price:"€2199", rating:"⭐⭐⭐⭐⭐", img:"https://images.unsplash.com/photo-1517336714731-489689fd1ca8?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80", desc:"36GB RAM, 1TB SSD, Liquid Retina XDR Space Black", category:"Laptops"},
-  {title:"Dell XPS 16", price:"€1899", rating:"⭐⭐⭐⭐⭐", img:"https://images.unsplash.com/photo-1496181133206-80ce9b88a853?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80", desc:"OLED Touch, Intel Core Ultra 9, RTX 4070 Platinum", category:"Laptops"},
-  {title:"ASUS ROG Zephyrus G16", price:"€2299", rating:"⭐⭐⭐⭐⭐", img:"https://images.unsplash.com/photo-1593642702821-c8da6771f0c6?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80", desc:"RTX 4080, Intel i9-13900H, 32GB RAM ROG Nebula", category:"Laptops"},
-  
-  // WATCHES
-  {title:"Apple Watch Ultra 2", price:"€899", rating:"⭐⭐⭐⭐⭐", img:"https://images.unsplash.com/photo-1664879235597-53a55633a9c3?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80", desc
+  // ⌚ LUXURY WATCHES (Italy Special)
+  {id:5, title:"Apple Watch Ultra 3", price:"€899", rating:"⭐⭐⭐⭐⭐ 4.9", img:"https://images.unsplash.com/photo-1664879235597-53a55633a9c3?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80", desc:"Titanium case, S10 chip, 36hr battery, Action button", category:"Watches"},
+  {id:6, title:"Rolex Submariner Date", price:"€12,500", rating:"⭐⭐⭐⭐⭐ 5.0", img:"https://images.unsplash.com/photo-1621184455862-ebc1a8ebdafb?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80", desc:"41mm Black dial, Ceramic bezel, 300m water resistant", category:"Watches"},
+  {id:7, title:"Omega Seamaster 300", price:"€5,800", rating:"⭐⭐⭐⭐⭐ 4.9", img:"https://images.unsplash.com/photo-1579586140626-0a9f8e577be9
