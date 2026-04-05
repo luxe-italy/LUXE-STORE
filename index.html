@@ -222,8 +222,8 @@ footer {
     <div class="logo">LUXE Store</div>
     <div class="header-top-right">
       <a href="#" onclick="showModal()">Login/Signup</a>
-      <a href="#">Cart</a>
-      <a href="#">Wishlist</a>
+      <a href="#">🛒 Cart (0)</a>
+      <a href="#">❤️ Wishlist</a>
     </div>
   </div>
   <div class="header-main">
@@ -233,13 +233,13 @@ footer {
     </div>
     <div class="categories">
       <ul>
-        <li><a href="#">Electronics</a></li>
-        <li><a href="#">Fashion</a></li>
-        <li><a href="#">Luxury</a></li>
-        <li><a href="#">Phones</a></li>
-        <li><a href="#">Watches</a></li>
-        <li><a href="#">Laptops</a></li>
-        <li><a href="#">Accessories</a></li>
+        <li><a href="#">📱 Electronics</a></li>
+        <li><a href="#">👔 Fashion</a></li>
+        <li><a href="#">💎 Luxury</a></li>
+        <li><a href="#">⌚ Watches</a></li>
+        <li><a href="#">💻 Laptops</a></li>
+        <li><a href="#">👟 Shoes</a></li>
+        <li><a href="#">💼 Bags</a></li>
       </ul>
     </div>
   </div>
@@ -248,15 +248,15 @@ footer {
 <div class="main-container">
   <div style="display:flex;">
     <div class="sidebar">
-      <h3>🔥 Trending Products</h3>
+      <h3>🔥 Top Trending</h3>
       <input type="text" id="sidebarSearch" placeholder="Quick search..." onkeyup="filterProducts()">
       <ul id="productList"></ul>
     </div>
     
     <div>
       <div class="banner">
-        <h1>Premium Electronics & Luxury</h1>
-        <p>Discover the best deals on trending items from Italy</p>
+        <h1>🇮🇹 Premium Italy Collection</h1>
+        <p>50+ Trending Electronics & Luxury Items | Best Prices Guaranteed</p>
       </div>
       
       <div class="products-grid" id="mainProducts">
@@ -277,36 +277,36 @@ footer {
 <div id="loginModal" class="modal">
   <div class="modal-content">
     <span class="close-btn" onclick="closeModal()">×</span>
-    <h2>Login / Signup</h2>
-    <input type="text" placeholder="Email" id="emailInput">
-    <input type="password" placeholder="Password" id="passwordInput">
-    <button onclick="handleLogin()">Login / Signup</button>
-    <p style="margin-top:15px; color:#666; font-size:14px;">Join 1M+ satisfied customers</p>
+    <h2>👋 Welcome Back</h2>
+    <input type="text" placeholder="📧 Email" id="emailInput">
+    <input type="password" placeholder="🔒 Password" id="passwordInput">
+    <button onclick="handleLogin()">🚀 Continue Shopping</button>
+    <p style="margin-top:15px; color:#666; font-size:14px;">Join 1M+ satisfied customers | Fast & Secure</p>
   </div>
 </div>
 
 <footer>
   <div class="footer-content">
     <div class="footer-section">
-      <h4>LUXE Store</h4>
-      <p>Premium Electronics & Luxury Items from Italy</p>
+      <h4>🏪 LUXE Store</h4>
+      <p>Premium Electronics & Luxury Items<br>Direct from Italy 🇮🇹</p>
     </div>
     <div class="footer-section">
-      <h4>Customer Care</h4>
+      <h4>🛠️ Customer Care</h4>
       <a href="#">Help Center</a>
       <a href="#">Contact Us</a>
       <a href="#">Returns</a>
       <a href="#">Shipping Info</a>
     </div>
     <div class="footer-section">
-      <h4>Quick Links</h4>
-      <a href="#">Electronics</a>
-      <a href="#">Fashion</a>
-      <a href="#">Luxury</a>
+      <h4>⚡ Quick Links</h4>
       <a href="#">New Arrivals</a>
+      <a href="#">Best Sellers</a>
+      <a href="#">Flash Sale</a>
+      <a href="#">Clearance</a>
     </div>
     <div class="footer-section">
-      <h4>Follow Us</h4>
+      <h4>📱 Follow Us</h4>
       <a href="#">Facebook</a>
       <a href="#">Instagram</a>
       <a href="#">Twitter</a>
@@ -314,21 +314,26 @@ footer {
     </div>
   </div>
   <div class="footer-bottom">
-    &copy; 2026 LUXE Store - Premium Italy Items. All Rights Reserved.
+    &copy; 2026 LUXE Store - Premium Italy Items. All Rights Reserved. | Free Shipping Italy
   </div>
 </footer>
 
 <script>
-// 50 Premium Products with HD Images
+// 50 TRENDING ITALY PRODUCTS WITH HD IMAGES - PERFECT PRICES
 const products = [
-  {title:"iPhone 17 Pro Max", price:"€1899", rating:"⭐⭐⭐⭐⭐", img:"https://images.unsplash.com/photo-1592899679764-6d9a0169e4c7?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80", desc:"Latest iPhone 17 Pro Max with A19 chip, 6.9\" display & 48MP camera.", category:"Electronics"},
-  {title:"AirPods Pro 3", price:"€249", rating:"⭐⭐⭐⭐⭐", img:"https://images.unsplash.com/photo-1588880331178-7fdf7e1e4e57?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80", desc:"Noise cancelling AirPods Pro 3 with spatial audio & 30hr battery.", category:"Electronics"},
-  {title:"Apple Watch Series 10", price:"€499", rating:"⭐⭐⭐⭐⭐", img:"https://images.unsplash.com/photo-1523275335684-37898b6baf30?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80", desc:"Luxury Apple Watch Series 10 with health tracking & titanium case.", category:"Electronics"},
-  {title:"Luxury Leather Bag", price:"€199", rating:"⭐⭐⭐⭐", img:"https://images.unsplash.com/photo-1553062407-98eeb64c6a62?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80", desc:"Premium Italian leather bag for men and women. Handcrafted.", category:"Fashion"},
-  {title:"Sony WH-1000XM5", price:"€349", rating:"⭐⭐⭐⭐⭐", img:"https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80", desc:"Best noise cancelling headphones with 30hr battery & Hi-Res audio.", category:"Electronics"},
-  {title:"Gucci Designer Shoes", price:"€450", rating:"⭐⭐⭐⭐⭐", img:"https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80", desc:"Premium Gucci leather sneakers. Limited edition design.", category:"Fashion"},
-  {title:"Samsung 55\" QLED 4K", price:"€699", rating:"⭐⭐⭐⭐⭐", img:"https://images.unsplash.com/photo-1593375513789-82ececf90b5b?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80", desc:"55\" QLED TV with 8K upscaling & Quantum HDR.", category:"Electronics"},
-  {title:"MacBook Pro M4", price:"€2199", rating:"⭐⭐⭐⭐⭐", img:"https://images.unsplash.com/photo-1517336714731-489689fd1ca8?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80", desc:"16\" MacBook Pro M4 with 36GB RAM & 1TB SSD.", category:"Electronics"},
-  {title:"Dior Perfume Set", price:"€189", rating:"⭐⭐⭐⭐⭐", img:"https://images.unsplash.com/photo-1574169208507-84376144848b?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80", desc:"Exclusive Dior Sauvage & J'adore perfume gift set.", category:"Luxury"},
-  {title:"GoPro HERO 13", price:"€449", rating:"⭐⭐⭐⭐⭐", img:"https://images.unsplash.com/photo-1603104038728-98e2421b32b8?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80", desc:"4K action camera with HyperSmooth 6.0 stabilization.", category:"Electronics"},
- 
+  // PHONES (Required)
+  {title:"iPhone 17 Pro Max 1TB", price:"€1899", rating:"⭐⭐⭐⭐⭐", img:"https://images.unsplash.com/photo-1592899679764-6d9a0169e4c7?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80", desc:"Titanium Desert Titanium, A19 Pro chip, 48MP camera", category:"Phones"},
+  {title:"Samsung Galaxy S24 Ultra", price:"€1399", rating:"⭐⭐⭐⭐⭐", img:"https://images.unsplash.com/photo-1701363684658-e503331e36f9?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80", desc:"S Pen included, 200MP camera, 12GB RAM Titanium Gray", category:"Phones"},
+  
+  // HEADPHONES & AUDIO
+  {title:"Sony WH-1000XM5", price:"€349", rating:"⭐⭐⭐⭐⭐", img:"https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80", desc:"Best ANC, 30hr battery, Hi-Res Audio Black", category:"Electronics"},
+  {title:"AirPods Pro 3", price:"€249", rating:"⭐⭐⭐⭐⭐", img:"https://images.unsplash.com/photo-1588880331178-7fdf7e1e4e57?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80", desc:"Spatial Audio, Active Noise Cancel, USB-C MagSafe", category:"Electronics"},
+  {title:"Bose QuietComfort Ultra", price:"€429", rating:"⭐⭐⭐⭐⭐", img:"https://images.unsplash.com/photo-1613644716394-1f308eb69299?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80", desc:"Immersive Audio, CustomTune tech, 24hr battery", category:"Electronics"},
+  
+  // LAPTOPS
+  {title:"MacBook Pro 16 M4 Pro", price:"€2199", rating:"⭐⭐⭐⭐⭐", img:"https://images.unsplash.com/photo-1517336714731-489689fd1ca8?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80", desc:"36GB RAM, 1TB SSD, Liquid Retina XDR Space Black", category:"Laptops"},
+  {title:"Dell XPS 16", price:"€1899", rating:"⭐⭐⭐⭐⭐", img:"https://images.unsplash.com/photo-1496181133206-80ce9b88a853?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80", desc:"OLED Touch, Intel Core Ultra 9, RTX 4070 Platinum", category:"Laptops"},
+  {title:"ASUS ROG Zephyrus G16", price:"€2299", rating:"⭐⭐⭐⭐⭐", img:"https://images.unsplash.com/photo-1593642702821-c8da6771f0c6?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80", desc:"RTX 4080, Intel i9-13900H, 32GB RAM ROG Nebula", category:"Laptops"},
+  
+  // WATCHES
+  {title:"Apple Watch Ultra 2", price:"€899", rating:"⭐⭐⭐⭐⭐", img:"https://images.unsplash.com/photo-1664879235597-53a55633a9c3?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80", desc
