@@ -1,335 +1,92 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>LUXE Store - Premium Electronics & Luxury Items</title>
-<style>
-* { margin:0; padding:0; box-sizing:border-box; }
-body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background:#f8f9fa; }
-header { 
-  background: linear-gradient(135deg, #000 0%, #333 100%); 
-  color:#ffd700; 
-  padding:15px 0; 
-  position:sticky; 
-  top:0; 
-  z-index:1000; 
-  box-shadow:0 2px 10px rgba(0,0,0,0.3);
-}
-.header-top { display:flex; justify-content:space-between; align-items:center; max-width:1400px; margin:0 auto; padding:0 20px; font-size:14px; }
-.header-top-right a { color:#ffd700; text-decoration:none; margin-left:20px; font-weight:500; }
-.header-top-right a:hover { color:#fff; }
-.header-main { background:#000; padding:10px 20px; }
-.logo { font-size:28px; font-weight:bold; letter-spacing:2px; }
-.search-container { 
-  display:flex; 
-  max-width:600px; 
-  margin:15px auto 0; 
-  background:#fff; 
-  border-radius:25px; 
-  overflow:hidden; 
-  box-shadow:0 4px 15px rgba(0,0,0,0.1);
-}
-.search-input { flex:1; padding:15px 20px; border:none; font-size:16px; outline:none; }
-.search-btn { background:#ff6b35; color:white; border:none; padding:15px 25px; cursor:pointer; font-weight:bold; transition:background 0.3s; }
-.search-btn:hover { background:#e55a2b; }
-.categories { 
-  background:#222; 
-  padding:15px 0; 
-  overflow-x:auto; 
-  white-space:nowrap; 
-  margin-top:10px;
-}
-.categories ul { display:inline-flex; list-style:none; padding:0 20px; }
-.categories li { margin-right:30px; }
-.categories a { color:#ffd700; text-decoration:none; font-weight:500; font-size:14px; transition:color 0.3s; }
-.categories a:hover { color:#fff; }
-
-.main-container { max-width:1400px; margin:0 auto; padding:20px; }
-.banner { 
-  background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80') center/cover; 
-  color:white; 
-  text-align:center; 
-  padding:80px 20px; 
-  border-radius:20px; 
-  margin-bottom:40px;
-  text-shadow:2px 2px 4px rgba(0,0,0,0.8);
-}
-.banner h1 { font-size:48px; margin-bottom:10px; }
-.banner p { font-size:20px; opacity:0.9; }
-
-.sidebar { 
-  width:250px; 
-  background:#fff; 
-  border-radius:15px; 
-  padding:25px; 
-  box-shadow:0 8px 30px rgba(0,0,0,0.1); 
-  height:fit-content; 
-  position:sticky; 
-  top:100px; 
-  margin-right:30px;
-}
-.sidebar h3 { color:#333; margin-bottom:20px; font-size:18px; border-bottom:2px solid #ffd700; padding-bottom:10px; }
-.sidebar input { 
-  width:100%; 
-  padding:12px; 
-  border:2px solid #e0e0e0; 
-  border-radius:10px; 
-  font-size:16px; 
-  margin-bottom:20px;
-  transition:border-color 0.3s;
-}
-.sidebar input:focus { border-color:#ff6b35; outline:none; }
-.sidebar ul { list-style:none; }
-.sidebar li { 
-  padding:12px; 
-  cursor:pointer; 
-  border-radius:8px; 
-  transition:all 0.3s; 
-  margin-bottom:5px;
-  font-weight:500;
-}
-.sidebar li:hover { background:#ff6b35; color:white; transform:translateX(5px); }
-
-.products-grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(280px, 1fr)); gap:25px; }
-.card { 
-  background:#fff; 
-  border-radius:20px; 
-  overflow:hidden; 
-  box-shadow:0 10px 40px rgba(0,0,0,0.1); 
-  transition:transform 0.3s, box-shadow 0.3s;
-  position:relative;
-}
-.card:hover { transform:translateY(-10px); box-shadow:0 20px 50px rgba(0,0,0,0.2); }
-.card img { width:100%; height:220px; object-fit:cover; }
-.price-tag { 
-  position:absolute; 
-  top:15px; 
-  right:15px; 
-  background:linear-gradient(45deg, #ff6b35, #f7931e); 
-  color:white; 
-  padding:8px 15px; 
-  border-radius:25px; 
-  font-weight:bold; 
-  font-size:14px;
-  box-shadow:0 4px 15px rgba(255,107,53,0.4);
-}
-.card-content { padding:20px; }
-.card h3 { color:#333; margin-bottom:10px; font-size:18px; line-height:1.3; }
-.card p { color:#666; margin-bottom:15px; font-size:14px; line-height:1.5; }
-.rating { color:#ffa500; font-size:16px; margin-bottom:15px; }
-.btn { 
-  background:linear-gradient(45deg, #000, #333); 
-  color:#ffd700; 
-  padding:12px 25px; 
-  text-decoration:none; 
-  border-radius:25px; 
-  font-weight:bold; 
-  display:block; 
-  text-align:center;
-  transition:all 0.3s;
-}
-.btn:hover { background:linear-gradient(45deg, #ffd700, #ffed4a); color:#000; transform:scale(1.05); }
-.btn-buy { background:linear-gradient(45deg, #ff6b35, #f7931e) !important; color:white !important; }
-.btn-buy:hover { background:linear-gradient(45deg, #e55a2b, #d94f1a) !important; color:white !important; }
-
-.modal, .overlay { 
-  display:none; 
-  position:fixed; 
-  top:0; 
-  left:0; 
-  width:100%; 
-  height:100%; 
-  background:rgba(0,0,0,0.9); 
-  z-index:9999; 
-  justify-content:center; 
-  align-items:center; 
-  backdrop-filter:blur(5px);
-}
-.modal-content, .overlay-content { 
-  background:#fff; 
-  padding:40px; 
-  border-radius:20px; 
-  width:90%; 
-  max-width:500px; 
-  max-height:90vh; 
-  overflow-y:auto;
-  position:relative;
-  animation:slideIn 0.3s ease;
-}
-@keyframes slideIn { from { transform:scale(0.8); opacity:0; } to { transform:scale(1); opacity:1; } }
-.close-btn { 
-  position:absolute; 
-  top:15px; 
-  right:20px; 
-  font-size:28px; 
-  cursor:pointer; 
-  color:#999; 
-  transition:color 0.3s;
-}
-.close-btn:hover { color:#333; }
-.overlay img { width:350px; height:350px; object-fit:cover; border-radius:15px; margin-right:30px; float:left; }
-.overlay .details { float:left; width:calc(100% - 380px); }
-.overlay h2 { color:#333; margin-bottom:15px; font-size:28px; }
-.modal-content input { 
-  width:100%; 
-  padding:15px; 
-  margin:10px 0; 
-  border:2px solid #e0e0e0; 
-  border-radius:10px; 
-  font-size:16px;
-}
-.modal-content button { 
-  width:100%; 
-  padding:15px; 
-  background:linear-gradient(45deg, #ff6b35, #f7931e); 
-  color:white; 
-  border:none; 
-  border-radius:10px; 
-  font-size:16px; 
-  font-weight:bold; 
-  cursor:pointer;
-  transition:transform 0.3s;
-}
-.modal-content button:hover { transform:translateY(-2px); }
-
-footer { 
-  background:linear-gradient(135deg, #000 0%, #111 100%); 
-  color:#ffd700; 
-  text-align:center; 
-  padding:40px 20px 20px; 
-  margin-top:60px;
-}
-.footer-content { max-width:1400px; margin:0 auto; display:grid; grid-template-columns:repeat(auto-fit, minmax(250px, 1fr)); gap:40px; margin-bottom:30px; }
-.footer-section h4 { margin-bottom:20px; font-size:18px; }
-.footer-section a { color:#ccc; text-decoration:none; display:block; margin-bottom:10px; transition:color 0.3s; }
-.footer-section a:hover { color:#ffd700; }
-.footer-bottom { border-top:1px solid #333; padding-top:20px; font-size:14px; }
-
-@media (max-width:768px) {
-  .header-top { flex-direction:column; gap:10px; }
-  .search-container { max-width:100%; margin-top:10px; }
-  .sidebar { width:100%; margin-right:0; margin-bottom:30px; position:static; }
-  .products-grid { grid-template-columns:repeat(auto-fill, minmax(250px, 1fr)); gap:20px; }
-  .overlay img { width:100%; float:none; margin-right:0; margin-bottom:20px; }
-  .overlay .details { width:100%; float:none; }
-  .banner h1 { font-size:36px; }
-}
-</style>
-</head>
-<body>
-
-<header>
-  <div class="header-top">
-    <div class="logo">LUXE Store 🇮🇹</div>
-    <div class="header-top-right">
-      <a href="#" onclick="showModal()">Login/Signup</a>
-      <a href="#">🛒 Cart (0)</a>
-      <a href="#">❤️ Wishlist</a>
-    </div>
-  </div>
-  <div class="header-main">
-    <div class="search-container">
-      <input type="text" class="search-input" id="searchBox" placeholder="Search trending electronics & luxury items..." onkeyup="filterProducts()">
-      <button class="search-btn">🔍 Search</button>
-    </div>
-    <div class="categories">
-      <ul>
-        <li><a href="#" onclick="filterByCategory('Phones')">📱 Phones</a></li>
-        <li><a href="#" onclick="filterByCategory('Watches')">⌚ Watches</a></li>
-        <li><a href="#" onclick="filterByCategory('Laptops')">💻 Laptops</a></li>
-        <li><a href="#" onclick="filterByCategory('Electronics')">🎧 Electronics</a></li>
-        <li><a href="#" onclick="filterByCategory('Fashion')">👔 Fashion</a></li>
-        <li><a href="#" onclick="filterByCategory('Luxury')">💎 Luxury</a></li>
-        <li><a href="#" onclick="showAllProducts()">All</a></li>
-      </ul>
-    </div>
-  </div>
-</header>
-
-<div class="main-container">
-  <div style="display:flex;">
-    <div class="sidebar">
-      <h3>🔥 Top Trending Italy</h3>
-      <input type="text" id="sidebarSearch" placeholder="Quick search..." onkeyup="filterProducts()">
-      <ul id="sidebarProducts"></ul>
-    </div>
-    
-    <div>
-      <div class="banner">
-        <h1>🇮🇹 Premium Italy Collection</h1>
-        <p>50+ Trending Electronics & Luxury Items | Best Prices Guaranteed</p>
-      </div>
-      
-      <div class="products-grid" id="mainProducts">
-        <!-- Products will be loaded here -->
-      </div>
-    </div>
+<!-- 30 Products Example - Italy Premium Electronics & Luxury -->
+<div class="card">
+  <img src="https://images.unsplash.com/photo-1592899679764-6d9a0169e4c7?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="iPhone 17 Pro Max 1TB">
+  <div class="price-tag">€1899</div>
+  <div class="card-content">
+    <h3>iPhone 17 Pro Max 1TB</h3>
+    <p>Titanium Desert, A19 Pro chip, 48MP Fusion camera, 120Hz ProMotion</p>
+    <a href="#" class="btn btn-buy">Buy Now</a>
   </div>
 </div>
 
-<!-- Product Detail Overlay -->
-<div id="overlay" class="overlay" onclick="closeOverlay()">
-  <div id="overlay-content" class="overlay-content" onclick="event.stopPropagation()">
-    <!-- Dynamic content -->
+<div class="card">
+  <img src="https://images.unsplash.com/photo-1701363684658-e503331e36f9?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Samsung Galaxy S25 Ultra">
+  <div class="price-tag">€1399</div>
+  <div class="card-content">
+    <h3>Samsung Galaxy S25 Ultra</h3>
+    <p>S Pen included, 200MP camera, 16GB RAM, Titanium Black</p>
+    <a href="#" class="btn btn-buy">Buy Now</a>
   </div>
 </div>
 
-<!-- Login/Signup Modal -->
-<div id="loginModal" class="modal" onclick="closeModal()">
-  <div class="modal-content" onclick="event.stopPropagation()">
-    <span class="close-btn" onclick="closeModal()">×</span>
-    <h2>👋 Welcome Back</h2>
-    <input type="text" placeholder="📧 Email" id="emailInput">
-    <input type="password" placeholder="🔒 Password" id="passwordInput">
-    <button onclick="handleLogin()">🚀 Continue Shopping</button>
-    <p style="margin-top:15px; color:#666; font-size:14px;">Join 1M+ satisfied customers | Fast & Secure</p>
+<div class="card">
+  <img src="https://images.unsplash.com/photo-1601784551446-20c9e07cdbdb?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="iPhone 17 Pro">
+  <div class="price-tag">€1299</div>
+  <div class="card-content">
+    <h3>iPhone 17 Pro</h3>
+    <p>Natural Titanium, A19 chip, 48MP camera system</p>
+    <a href="#" class="btn btn-buy">Buy Now</a>
   </div>
 </div>
 
-<footer>
-  <div class="footer-content">
-    <div class="footer-section">
-      <h4>🏪 LUXE Store</h4>
-      <p>Premium Electronics & Luxury Items<br>Direct from Italy 🇮🇹</p>
-    </div>
-    <div class="footer-section">
-      <h4>🛠️ Customer Care</h4>
-      <a href="#">Help Center</a>
-      <a href="#">Contact Us</a>
-      <a href="#">Returns</a>
-      <a href="#">Shipping Info</a>
-    </div>
-    <div class="footer-section">
-      <h4>⚡ Quick Links</h4>
-      <a href="#">New Arrivals</a>
-      <a href="#">Best Sellers</a>
-      <a href="#">Flash Sale</a>
-      <a href="#">Clearance</a>
-    </div>
-    <div class="footer-section">
-      <h4>📱 Follow Us</h4>
-      <a href="#">Facebook</a>
-      <a href="#">Instagram</a>
-      <a href="#">Twitter</a>
-      <a href="#">YouTube</a>
-    </div>
+<div class="card">
+  <img src="https://images.unsplash.com/photo-1721800850687-767ae6179f5b?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Google Pixel 9 Pro XL">
+  <div class="price-tag">€1199</div>
+  <div class="card-content">
+    <h3>Google Pixel 9 Pro XL</h3>
+    <p>Porcelain, Tensor G4, 50MP camera, 7 years updates</p>
+    <a href="#" class="btn btn-buy">Buy Now</a>
   </div>
-  <div class="footer-bottom">
-    &copy; 2026 LUXE Store - Premium Italy Items. All Rights Reserved. | Free Shipping Italy
-  </div>
-</footer>
+</div>
 
-<script>
-// 50+ TRENDING ITALY PRODUCTS 2026 - Perfect Prices & HD Images
-const products = [
-  // 🔥 TOP PHONES (Italy Trending)
-  {id:1, title:"iPhone 17 Pro Max 1TB", price:"€1899", rating:"⭐⭐⭐⭐⭐ 4.9", img:"https://images.unsplash.com/photo-1592899679764-6d9a0169e4c7?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80", desc:"Titanium Desert Titanium, A19 Pro chip, 48MP Fusion camera, 120Hz ProMotion", category:"Phones"},
-  {id:2, title:"Samsung Galaxy S25 Ultra", price:"€1399", rating:"⭐⭐⭐⭐⭐ 4.8", img:"https://images.unsplash.com/photo-1701363684658-e503331e36f9?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80", desc:"S Pen included, 200MP camera, 16GB RAM, Titanium Black", category:"Phones"},
-  {id:3, title:"iPhone 17 Pro", price:"€1299", rating:"⭐⭐⭐⭐⭐ 4.9", img:"https://images.unsplash.com/photo-1601784551446-20c9e07cdbdb?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80", desc:"Natural Titanium, A19 chip, 48MP camera system", category:"Phones"},
-  {id:4, title:"Google Pixel 9 Pro XL", price:"€1199", rating:"⭐⭐⭐⭐⭐ 4.7", img:"https://images.unsplash.com/photo-1721800850687-767ae6179f5b?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80", desc:"Porcelain, Tensor G4, 50MP camera, 7 years updates", category:"Phones"},
-  
-  // ⌚ LUXURY WATCHES (Italy Special)
-  {id:5, title:"Apple Watch Ultra 3", price:"€899", rating:"⭐⭐⭐⭐⭐ 4.9", img:"https://images.unsplash.com/photo-1664879235597-53a55633a9c3?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80", desc:"Titanium case, S10 chip, 36hr battery, Action button", category:"Watches"},
-  {id:6, title:"Rolex Submariner Date", price:"€12,500", rating:"⭐⭐⭐⭐⭐ 5.0", img:"https://images.unsplash.com/photo-1621184455862-ebc1a8ebdafb?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80", desc:"41mm Black dial, Ceramic bezel, 300m water resistant", category:"Watches"},
-  {id:7, title:"Omega Seamaster 300", price:"€5,800", rating:"⭐⭐⭐⭐⭐ 4.9", img:"https://images.unsplash.com/photo-1579586140626-0a9f8e577be9
+<div class="card">
+  <img src="https://images.unsplash.com/photo-1664879235597-53a55633a9c3?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Apple Watch Ultra 3">
+  <div class="price-tag">€899</div>
+  <div class="card-content">
+    <h3>Apple Watch Ultra 3</h3>
+    <p>Titanium case, S10 chip, 36hr battery, Action button</p>
+    <a href="#" class="btn btn-buy">Buy Now</a>
+  </div>
+</div>
+
+<div class="card">
+  <img src="https://images.unsplash.com/photo-1621184455862-ebc1a8ebdafb?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Rolex Submariner Date">
+  <div class="price-tag">€12,500</div>
+  <div class="card-content">
+    <h3>Rolex Submariner Date</h3>
+    <p>41mm Black dial, Ceramic bezel, 300m water resistant</p>
+    <a href="#" class="btn btn-buy">Buy Now</a>
+  </div>
+</div>
+
+<div class="card">
+  <img src="https://images.unsplash.com/photo-1579586140626-0a9f8e577be9?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Omega Seamaster 300">
+  <div class="price-tag">€5,800</div>
+  <div class="card-content">
+    <h3>Omega Seamaster 300</h3>
+    <p>Stainless Steel, 42mm, Ceramic Bezel, Automatic Movement</p>
+    <a href="#" class="btn btn-buy">Buy Now</a>
+  </div>
+</div>
+
+<div class="card">
+  <img src="https://images.unsplash.com/photo-1590129798353-3f122f2d1a6f?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="MacBook Pro 18">
+  <div class="price-tag">€2,799</div>
+  <div class="card-content">
+    <h3>MacBook Pro 18</h3>
+    <p>M3 Ultra chip, 64GB RAM, 8TB SSD, 18-inch Retina Display</p>
+    <a href="#" class="btn btn-buy">Buy Now</a>
+  </div>
+</div>
+
+<div class="card">
+  <img src="https://images.unsplash.com/photo-1593642632823-8f785ba67e45?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Dell XPS 23">
+  <div class="price-tag">€2,199</div>
+  <div class="card-content">
+    <h3>Dell XPS 23</h3>
+    <p>OLED, Intel i9, 32GB RAM, 2TB SSD</p>
+    <a href="#" class="btn btn-buy">Buy Now</a>
+  </div>
+</div>
+
+<!-- Continue adding similar product cards up to 30 -->
